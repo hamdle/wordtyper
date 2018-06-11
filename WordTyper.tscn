@@ -1,12 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://ubuntu_dynamicfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://WordTyper.gd" type="Script" id=1]
+[ext_resource path="res://ubuntu_dynamicfont.tres" type="DynamicFont" id=2]
 
 [node name="WordTyper" type="Node" index="0"]
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="." index="0"]
+script = ExtResource( 1 )
 
-position = Vector2( 196, 278 )
+[node name="Cmd" type="KinematicBody2D" parent="." index="0"]
+
+position = Vector2( 242, 275 )
 scale = Vector2( 1, 1 )
 input_pickable = false
 collision_layer = 1
@@ -16,7 +19,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Container" type="Container" parent="KinematicBody2D" index="0"]
+[node name="Screen" type="Container" parent="Cmd" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -32,7 +35,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Margin" ]
 
-[node name="Label" type="Label" parent="KinematicBody2D/Container" index="0"]
+[node name="TypeHere" type="Label" parent="Cmd/Screen" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -46,11 +49,20 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 1 )
-text = "Composer"
+custom_fonts/font = ExtResource( 2 )
+text = "composer update"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts", "custom_styles" ]
+
+[node name="Timer" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = false
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
 
